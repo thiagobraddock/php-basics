@@ -1,0 +1,217 @@
+/* Reset e configurações gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Container principal */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-form {
+  max-width: 600px;
+}
+
+/* Títulos */
+h1 {
+  text-align: center;
+  color: #8b4513;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+}
+
+h1.form-title {
+  font-size: 2.2em;
+}
+
+/* Botões */
+.btn {
+  background-color: #8b4513;
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #a0522d;
+}
+
+.btn-voltar {
+  background-color: #6c757d;
+}
+
+.btn-voltar:hover {
+  background-color: #545b62;
+}
+
+/* Cards das cafeterias */
+.cafeteria-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: box-shadow 0.3s;
+}
+
+.cafeteria-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cafeteria-nome {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #8b4513;
+  margin-bottom: 10px;
+}
+
+.cafeteria-info {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.especialidade {
+  font-style: italic;
+  color: #666;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+/* Estado vazio */
+.nenhuma-cafeteria {
+  text-align: center;
+  color: #999;
+  font-size: 1.2em;
+  padding: 40px;
+}
+
+/* Formulários */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.obrigatorio {
+  color: red;
+}
+
+input[type="text"],
+input[type="tel"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #8b4513;
+  box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+}
+
+textarea {
+  height: 80px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+}
+
+/* Mensagens */
+.mensagem {
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.mensagem.sucesso {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.mensagem.erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.erro-sistema {
+  color: red;
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  color: #999;
+  font-size: 0.9em;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .btn {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .cafeteria-card {
+    padding: 15px;
+  }
+}

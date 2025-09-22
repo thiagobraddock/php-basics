@@ -1,0 +1,15 @@
+# Ignoring IDE and system files
+.DS_Store
+.vscode/
+*.log
+
+# Ignoring temporary files
+*.tmp
+*.temp
+
+# Database connection config (for security)
+# config.php
+
+# XAMPP/Development files
+error.log
+access.log
