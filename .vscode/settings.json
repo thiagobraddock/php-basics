@@ -1,0 +1,9 @@
+{
+  "workbench.colorTheme": "Trigger.dark",
+  "window.zoomLevel": 2,
+  "chat.fontSize": 18,
+  "editor.mouseWheelZoom": true,
+  "files.autoSave": "off",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2
+}
