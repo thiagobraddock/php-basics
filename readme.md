@@ -14,8 +14,12 @@ Um sistema web simples para gerenciar cafeterias em Poços de Caldas, desenvolvi
 
 ### Arquivos de Configuração
 - `config.php` - Configurações do banco de dados
-- `includes/functions.php` - Funções auxiliares
-- `dump_banco.sql` - Script de criação do banco
+- `includes/functions.php` - Funções auxiliares e de autenticação
+- `dump_banco.sql` - Script de criação do banco (inclui tabela de usuários)
+
+### Autenticação
+- `login.php` - Página de login do sistema
+- `logout.php` - Script de logout
 
 ### Recursos
 - `assets/styles.css` - Estilos CSS
@@ -40,6 +44,25 @@ Este projeto foi estruturado para permitir que os alunos:
 1. Configure o banco MySQL executando `dump_banco.sql`
 2. Ajuste as configurações em `config.php`
 3. Acesse `index_dynamic.php` e `cadastrar_dynamic.php`
+
+## 🔐 Sistema de Autenticação
+
+O sistema agora inclui autenticação de usuários para controlar o acesso ao cadastro de cafeterias.
+
+### Funcionalidades de Autenticação:
+- **Login seguro** com hash de senhas
+- **Controle de sessão** PHP
+- **Proteção de páginas** de cadastro
+- **Interface de navegação** com status de login/logout
+
+### Credenciais de Teste:
+- **Usuário:** `admin`
+- **Senha:** `admin123`
+
+### Como Usar:
+1. Acesse `login.php` para fazer login
+2. Após autenticado, você poderá acessar o cadastro de cafeterias
+3. Use o link "Sair" para fazer logout
 
 ## 🛠️ Tecnologias
 
@@ -66,6 +89,8 @@ php -S localhost:8080
 - ✅ Interface responsiva e moderna
 - ✅ Listagem de cafeterias com informações completas
 - ✅ Cadastro com validação de dados
+- ✅ **Sistema de autenticação de usuários**
+- ✅ **Controle de acesso para cadastro de cafeterias**
 - ✅ Máscara automática para telefone
 - ✅ Mensagens de sucesso/erro
 - ✅ Separação clara entre template e lógica
@@ -76,6 +101,9 @@ php -S localhost:8080
 - Conexão e consultas PDO
 - Validação de dados server-side
 - Sanitização de inputs
+- **Sistema de autenticação com sessões PHP**
+- **Hash seguro de senhas (password_hash/password_verify)**
+- **Controle de acesso a páginas restritas**
 - Estrutura de projeto organizada
 - Boas práticas de segurança
 
