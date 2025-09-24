@@ -1,4 +1,11 @@
 <?php
+// TODO: Incluir config.php e implementar lógica de busca de cafeterias
+// TODO: Conectar com banco e buscar dados reais
+
+// Sistema de autenticação
+require_once 'includes/functions.php';
+iniciarSessao();
+$usuarioLogado = obterUsuarioLogado();
 ?>
 
 <!DOCTYPE html>
@@ -13,14 +20,32 @@
     <div class="container">
         <h1>☕ Cafeterias de Poços de Caldas</h1>
         
+        <!-- Barra de navegação/autenticação -->
+        <div style="text-align: right; margin-bottom: 20px;">
+            <?php if ($usuarioLogado): ?>
+                <span style="color: #666;">
+                    👤 Olá, <?php echo htmlspecialchars($usuarioLogado['nome_completo']); ?>!
+                </span>
+                <a href="logout.php" style="margin-left: 10px; color: #8b4513; text-decoration: none;">🚪 Sair</a>
+            <?php else: ?>
+                <a href="login.php" style="color: #8b4513; text-decoration: none;">🔑 Fazer Login</a>
+            <?php endif; ?>
+        </div>
+        
         <!-- Informações gerais -->
         <div style="text-align: center; margin-bottom: 20px; color: #666;">
             3 cafeterias cadastradas
             <!-- TODO: Substituir por código PHP dinâmico -->
         </div>
         
-        <!-- Link para cadastro -->
-        <a href="cadastrar.php" class="btn">➕ Cadastrar Nova Cafeteria</a>
+        <!-- Link para cadastro - controle de autenticação -->
+        <?php if ($usuarioLogado): ?>
+            <a href="cadastrar.php" class="btn">➕ Cadastrar Nova Cafeteria</a>
+        <?php else: ?>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="login.php" class="btn">🔑 Fazer Login para Cadastrar</a>
+            </div>
+        <?php endif; ?>
         
         <div class="cafeterias-lista">
             <!-- Exemplo de cards de cafeterias (dados estáticos para template) -->

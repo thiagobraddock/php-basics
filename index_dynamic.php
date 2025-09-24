@@ -8,9 +8,13 @@
 require_once 'config.php';
 require_once 'includes/functions.php';
 
+// Iniciar sessão para controle de autenticação
+iniciarSessao();
+
 // Buscar cafeterias do banco
 $cafeterias = buscarTodasCafeterias($pdo);
 $totalCafeterias = contarCafeterias($pdo);
+$usuarioLogado = obterUsuarioLogado();
 ?>
 
 <!DOCTYPE html>
@@ -25,13 +29,31 @@ $totalCafeterias = contarCafeterias($pdo);
     <div class="container">
         <h1>☕ Cafeterias de Poços de Caldas</h1>
         
+        <!-- Barra de navegação/autenticação -->
+        <div style="text-align: right; margin-bottom: 20px;">
+            <?php if ($usuarioLogado): ?>
+                <span style="color: #666;">
+                    👤 Olá, <?php echo htmlspecialchars($usuarioLogado['nome_completo']); ?>!
+                </span>
+                <a href="logout.php" style="margin-left: 10px; color: #8b4513; text-decoration: none;">🚪 Sair</a>
+            <?php else: ?>
+                <a href="login.php" style="color: #8b4513; text-decoration: none;">🔑 Fazer Login</a>
+            <?php endif; ?>
+        </div>
+        
         <!-- Informações gerais -->
         <div style="text-align: center; margin-bottom: 20px; color: #666;">
             <?php echo $totalCafeterias; ?> cafeteria<?php echo $totalCafeterias != 1 ? 's' : ''; ?> cadastrada<?php echo $totalCafeterias != 1 ? 's' : ''; ?>
         </div>
         
-        <!-- Link para cadastro -->
-        <a href="cadastrar_dynamic.php" class="btn">➕ Cadastrar Nova Cafeteria</a>
+        <!-- Link para cadastro - apenas para usuários logados -->
+        <?php if ($usuarioLogado): ?>
+            <a href="cadastrar_dynamic.php" class="btn">➕ Cadastrar Nova Cafeteria</a>
+        <?php else: ?>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="login.php" class="btn">🔑 Fazer Login para Cadastrar</a>
+            </div>
+        <?php endif; ?>
         
         <div class="cafeterias-lista">
             <?php if ($cafeterias !== false): ?>

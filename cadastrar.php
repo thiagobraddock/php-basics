@@ -1,4 +1,23 @@
 <?php
+// Incluir sistema de autenticação
+require_once 'includes/functions.php';
+
+// Verificar se usuário está logado
+iniciarSessao();
+if (!usuarioLogado()) {
+    header('Location: login.php');
+    exit;
+}
+
+// TODO: Incluir config.php e implementar lógica de cadastro
+// TODO: Processar formulário quando enviado via POST
+// TODO: Validar dados e inserir no banco
+
+// Dados para manter valores no formulário (implementar depois)
+$dados = ['nome' => '', 'endereco' => '', 'telefone' => '', 'especialidade' => ''];
+$mensagem = '';
+$tipo_mensagem = '';
+$usuarioLogado = obterUsuarioLogado();
 
 ?>
 
@@ -13,6 +32,12 @@
 <body>
     <div class="container container-form">
         <h1 class="form-title">☕ Cadastrar Nova Cafeteria</h1>
+        
+        <!-- Informações do usuário logado -->
+        <div style="text-align: right; margin-bottom: 20px; color: #666;">
+            👤 Logado como: <?php echo htmlspecialchars($usuarioLogado['nome_completo']); ?>
+            <a href="logout.php" style="margin-left: 10px; color: #8b4513; text-decoration: none;">🚪 Sair</a>
+        </div>
         
         <!-- TODO: Implementar exibição de mensagens de sucesso/erro -->
         <?php if (!empty($mensagem)): ?>
