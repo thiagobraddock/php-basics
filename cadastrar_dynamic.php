@@ -2,16 +2,22 @@
 /**
  * Página de cadastro de cafeterias
  * Versão refatorada com separação de responsabilidades
+ * REQUER AUTENTICAÇÃO
  */
 
 // Incluir dependências
 require_once 'config.php';
 require_once 'includes/functions.php';
 
+// Iniciar sessão e verificar autenticação
+iniciarSessao();
+requerAutenticacao('login.php');
+
 // Variáveis para controle
 $mensagem = '';
 $tipo_mensagem = '';
 $dados = ['nome' => '', 'endereco' => '', 'telefone' => '', 'especialidade' => ''];
+$usuarioLogado = obterUsuarioLogado();
 
 // Processar formulário se foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -54,6 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container container-form">
         <h1 class="form-title">☕ Cadastrar Nova Cafeteria</h1>
+        
+        <!-- Informações do usuário logado -->
+        <div style="text-align: right; margin-bottom: 20px; color: #666;">
+            👤 Logado como: <?php echo htmlspecialchars($usuarioLogado['nome_completo']); ?>
+            <a href="logout.php" style="margin-left: 10px; color: #8b4513; text-decoration: none;">🚪 Sair</a>
+        </div>
         
         <?php if (!empty($mensagem)): ?>
             <div class="mensagem <?php echo $tipo_mensagem; ?>">

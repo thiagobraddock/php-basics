@@ -177,4 +177,111 @@ function redirecionarPara($url) {
     header("Location: $url");
     exit;
 }
+
+/**
+ * Inicia sessão se ainda não foi iniciada
+ */
+function iniciarSessao() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+
+/**
+ * Autentica um usuário
+ * @param PDO $pdo Conexão com o banco
+ * @param string $username Nome de usuário  
+ * @param string $senha Senha
+ * @return array|false Dados do usuário ou false
+ */
+function autenticarUsuario($pdo, $username, $senha) {
+    try {
+        $sql = "SELECT * FROM usuarios WHERE username = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$username]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($usuario && password_verify($senha, $usuario['senha'])) {
+            return $usuario;
+        }
+        
+        return false;
+    } catch(PDOException $e) {
+        error_log("Erro na autenticação: " . $e->getMessage());
+        return false;
+    }
+}
+
+/**
+ * Verifica se o usuário está logado
+ * @return bool True se logado, False caso contrário
+ */
+function usuarioLogado() {
+    iniciarSessao();
+    return isset($_SESSION['usuario_id']) && !empty($_SESSION['usuario_id']);
+}
+
+/**
+ * Obtém dados do usuário logado
+ * @return array|null Dados do usuário ou null
+ */
+function obterUsuarioLogado() {
+    iniciarSessao();
+    if (usuarioLogado()) {
+        return [
+            'id' => $_SESSION['usuario_id'],
+            'username' => $_SESSION['usuario_username'] ?? '',
+            'nome_completo' => $_SESSION['usuario_nome'] ?? ''
+        ];
+    }
+    return null;
+}
+
+/**
+ * Realiza login do usuário
+ * @param array $usuario Dados do usuário
+ */
+function realizarLogin($usuario) {
+    iniciarSessao();
+    $_SESSION['usuario_id'] = $usuario['id'];
+    $_SESSION['usuario_username'] = $usuario['username'];
+    $_SESSION['usuario_nome'] = $usuario['nome_completo'];
+}
+
+/**
+ * Realiza logout do usuário
+ */
+function realizarLogout() {
+    iniciarSessao();
+    session_destroy();
+}
+
+/**
+ * Requer autenticação - redireciona para login se não autenticado
+ * @param string $redirect_url URL para redirecionamento após login
+ */
+function requerAutenticacao($redirect_url = 'login.php') {
+    if (!usuarioLogado()) {
+        redirecionarPara($redirect_url);
+    }
+}
+
+/**
+ * Valida dados de login
+ * @param array $dados Dados do formulário
+ * @return array Array de erros
+ */
+function validarDadosLogin($dados) {
+    $erros = [];
+    
+    if (empty(trim($dados['username']))) {
+        $erros[] = "Nome de usuário é obrigatório";
+    }
+    
+    if (empty(trim($dados['senha']))) {
+        $erros[] = "Senha é obrigatória";
+    }
+    
+    return $erros;
+}
 ?>
