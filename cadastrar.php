@@ -1,5 +1,4 @@
 <?php
-
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Cafeteria - Poços de Caldas</title>
+    <title>Cadastrar Estabelecimento - Espírito Santo do Pinhal</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <div class="container container-form">
-        <h1 class="form-title">☕ Cadastrar Nova Cafeteria</h1>
+    <h1 class="form-title">🏪 Cadastrar Novo Estabelecimento</h1>
         
         <!-- TODO: Implementar exibição de mensagens de sucesso/erro -->
         <?php if (!empty($mensagem)): ?>
@@ -24,16 +23,16 @@
         <form method="POST" action="">
             <div class="form-group">
                 <label for="nome">
-                    Nome da Cafeteria <span class="obrigatorio">*</span>
+                    Nome do Estabelecimento <span class="obrigatorio">*</span>
                 </label>
                 <input 
                     type="text" 
                     id="nome" 
                     name="nome" 
-                    value="<?php echo htmlspecialchars($dados['nome']); ?>" 
+                    value="<?php echo htmlspecialchars($dados['nome'] ?? ''); ?>" 
                     maxlength="100"
                     required
-                    placeholder="Ex: Café do Centro"
+                    placeholder="Ex: Restaurante Dona Elisa"
                 >
             </div>
             
@@ -45,11 +44,36 @@
                     type="text" 
                     id="endereco" 
                     name="endereco" 
-                    value="<?php echo htmlspecialchars($dados['endereco']); ?>" 
+                    value="<?php echo htmlspecialchars($dados['endereco'] ?? ''); ?>" 
                     maxlength="200"
                     required
-                    placeholder="Ex: Rua Rio de Janeiro, 123 - Centro"
+                    placeholder="Ex: Rua Treze de Maio, 210 - Centro"
                 >
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">
+                    Categoria <span class="obrigatorio">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="categoria" 
+                    name="categoria" 
+                    value="<?php echo htmlspecialchars($dados['categoria'] ?? ''); ?>" 
+                    maxlength="50"
+                    required
+                    placeholder="Ex: Cafeteria"
+                    list="categorias-sugeridas"
+                >
+                <datalist id="categorias-sugeridas">
+                    <option value="Cafeteria"></option>
+                    <option value="Restaurante"></option>
+                    <option value="Padaria"></option>
+                    <option value="Pizzaria"></option>
+                    <option value="Doceria"></option>
+                    <option value="Bar"></option>
+                </datalist>
+                <!-- TODO: Substituir por categorias vindas do banco -->
             </div>
             
             <div class="form-group">
@@ -58,9 +82,9 @@
                     type="tel" 
                     id="telefone" 
                     name="telefone" 
-                    value="<?php echo htmlspecialchars($dados['telefone']); ?>" 
+                    value="<?php echo htmlspecialchars($dados['telefone'] ?? ''); ?>" 
                     maxlength="20"
-                    placeholder="(35) 3721-1234"
+                    placeholder="(19) 3651-1234"
                 >
             </div>
             
@@ -70,14 +94,14 @@
                     id="especialidade" 
                     name="especialidade" 
                     maxlength="150"
-                    placeholder="Ex: Café expresso, doces artesanais, pão de açúcar mineiro..."
-                ><?php echo htmlspecialchars($dados['especialidade']); ?></textarea>
+                    placeholder="Ex: Comida caseira, cafés especiais, doces artesanais..."
+                ><?php echo htmlspecialchars($dados['especialidade'] ?? ''); ?></textarea>
                 <small style="color: #666;">Máximo 150 caracteres</small>
             </div>
             
             <div class="form-group">
                 <button type="submit" class="btn">
-                    💾 Cadastrar Cafeteria
+                    💾 Cadastrar Estabelecimento
                 </button>
                 <a href="index.php" class="btn btn-voltar">
                     ⬅️ Voltar para Lista

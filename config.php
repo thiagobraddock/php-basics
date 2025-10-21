@@ -8,7 +8,7 @@
 $host = 'localhost';        // Servidor do banco
 $usuario = 'root';          // Usuário do MySQL
 $senha = '';                // Senha do MySQL (deixe vazio se não tiver)
-$banco = 'cafeterias_pocos'; // Nome do banco de dados
+$banco = 'estabelecimentos_pinhal'; // Nome do banco de dados
 
 // Tentar conectar com o banco
 try {

@@ -1,21 +1,21 @@
-# Sistema de Cafeterias - PHP Básico
+# Sistema de Estabelecimentos de Espírito Santo do Pinhal - PHP Básico
 
-Um sistema web simples para gerenciar cafeterias em Poços de Caldas, desenvolvido em PHP puro com MySQL.
+Um sistema web simples para gerenciar estabelecimentos de Espírito Santo do Pinhal, desenvolvido em PHP puro com MySQL e focado em atividades práticas para sala de aula.
 
 ## 📋 Estrutura do Projeto
 
 ### Templates para Alunos (Interface Estática)
-- `index.php` - Página principal com lista de cafeterias (template)
-- `cadastrar.php` - Formulário de cadastro (template)
+- `index.php` - Página principal com lista de estabelecimentos (template)
+- `cadastrar.php` - Formulário de cadastro com campo de categoria (template)
 
 ### Versões Funcionais (Referência do Professor)
-- `index_dynamic.php` - Lista funcional conectada ao banco
-- `cadastrar_dynamic.php` - Cadastro funcional com validação
+- `index_dynamic.php` - Lista funcional com filtros dinâmicos por categoria
+- `cadastrar_dynamic.php` - Cadastro funcional com validação e sugestões de categorias
 
 ### Arquivos de Configuração
-- `config.php` - Configurações do banco de dados
-- `includes/functions.php` - Funções auxiliares
-- `dump_banco.sql` - Script de criação do banco
+- `config.php` - Configurações do banco de dados (estabelecimentos_pinhal)
+- `includes/functions.php` - Funções auxiliares, filtros e validações
+- `dump_banco.sql` - Script de criação e carga inicial do banco
 
 ### Recursos
 - `assets/styles.css` - Estilos CSS
@@ -32,7 +32,7 @@ Este projeto foi estruturado para permitir que os alunos:
 ## 🚀 Como Usar
 
 ### Para Alunos (Templates)
-1. Abra `index.php` para ver a interface da lista de cafeterias
+1. Abra `index.php` para ver a interface da lista de estabelecimentos
 2. Abra `cadastrar.php` para ver o formulário de cadastro
 3. Implemente a lógica PHP seguindo os comentários `// TODO:`
 
@@ -64,8 +64,8 @@ php -S localhost:8080
 ## 🎨 Funcionalidades
 
 - ✅ Interface responsiva e moderna
-- ✅ Listagem de cafeterias com informações completas
-- ✅ Cadastro com validação de dados
+- ✅ Listagem e contagem de estabelecimentos com filtro por categoria
+- ✅ Cadastro com validação de dados e sugestões de categorias
 - ✅ Máscara automática para telefone
 - ✅ Mensagens de sucesso/erro
 - ✅ Separação clara entre template e lógica
@@ -73,7 +73,7 @@ php -S localhost:8080
 ## 📚 Conceitos Demonstrados
 
 - Separação de responsabilidades (MVC básico)
-- Conexão e consultas PDO
+- Conexão e consultas PDO (com filtros dinâmicos)
 - Validação de dados server-side
 - Sanitização de inputs
 - Estrutura de projeto organizada
@@ -82,3 +82,27 @@ php -S localhost:8080
 ## 👨‍🏫 Para Professores
 
 Os arquivos `*_dynamic.php` contêm a implementação completa para referência. Os alunos trabalham nos arquivos principais (`index.php` e `cadastrar.php`) que começam como templates estáticos.
+## Fluxo
+
+Fluxo 1 - TODOS (padrão):
+URL: index_dynamic.php
+↓
+$_GET['categoria'] não existe
+↓
+$categoriaSelecionada = ''
+↓
+buscarEstabelecimentos($pdo, '') → SELECT * FROM estabelecimentos
+↓
+Mostra TODOS
+
+
+Fluxo 2 - FILTRADO:
+URL: index_dynamic.php?categoria=Cafeteria
+↓
+$_GET['categoria'] = 'Cafeteria'
+↓
+$categoriaSelecionada = 'Cafeteria'
+↓
+buscarEstabelecimentos($pdo, 'Cafeteria') → SELECT * WHERE categoria = 'Cafeteria'
+↓
+Mostra só Cafeterias
